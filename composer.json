@@ -1,0 +1,22 @@
+{
+    "name": "ryunosuke/type-converter",
+    "type": "library",
+    "description": "converter various types",
+    "keywords": ["ryunosuke", "library", "converter"],
+    "homepage": "https://bitbucket.org/ryunosuke/type-converter",
+    "license": "MIT",
+    "authors": [
+        { "name": "ryunosuke", "email": "ryunosuke.arima@gmail.com" }
+    ],
+    "autoload": {
+        "psr-0": {
+            "ryunosuke\\TypeConverter": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    }
+}

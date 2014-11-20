@@ -3,6 +3,10 @@
 namespace Test\Unit\TypeConverter;
 use ryunosuke\TypeConverter\AbstractConverter;
 
+class TestType extends \ryunosuke\TypeConverter\Json
+{
+}
+
 class AbstractConverterTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -18,9 +22,23 @@ class AbstractConverterTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    function getNamespace()
+    function addNamespace()
     {
-        $this->assertEquals('ryunosuke\\TypeConverter', AbstractConverter::getNamespace());
+        AbstractConverter::addNamespace(__NAMESPACE__);
+        $test = AbstractConverter::factory('TestType', array());
+        $this->assertInstanceOf(get_class(new TestType()), $test);
+    }
+
+    /**
+     * @test
+     */
+    function factory()
+    {
+        $json = AbstractConverter::factory('json', array());
+        $this->assertInstanceOf(get_class(new \ryunosuke\TypeConverter\Json()), $json);
+
+        $this->setExpectedException(get_class(new \InvalidArgumentException()));
+        AbstractConverter::factory('undefined', array());
     }
 
     /**

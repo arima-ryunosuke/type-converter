@@ -10,6 +10,12 @@ namespace ryunosuke\TypeConverter;
 abstract class AbstractConverter
 {
     /**
+     * factory用名前空間(オートロード前提)
+     * @var array
+     */
+    private static $_namespaces = array();
+
+    /**
      * 変換オプション
      *
      * このオプションの使い方は各々のクラスで異なる
@@ -26,17 +32,39 @@ abstract class AbstractConverter
     protected $mimetype = null;
 
     /**
-     * 名前空間を返す。
-     *
-     * 動的に生成することが多いと思われるので作成
-     * new AbstractConverter::getNamespace() . '\\' . ucfirst($string);
-     * のようにして作成できる
-     *
-     * @return string 自身の名前空間
+     * factory用名前空間を追加する
+     * @param string $namespace
      */
-    static public function getNamespace()
+    static public function addNamespace($namespace)
     {
-        return __NAMESPACE__;
+        self::$_namespaces[$namespace] = true;
+    }
+
+    /**
+     *
+     * @param string $name
+     * @param array|null $option
+     * @throws \InvalidArgumentException
+     * @return AbstractConverter
+     */
+    static public function factory($name, $option = null)
+    {
+        $namespaces = self::$_namespaces;
+        $namespaces[__NAMESPACE__] = true;
+
+        $names = explode("\\", $name);
+        $lastname = end($names);
+
+        foreach ($namespaces as $namespace => $dummy)
+        {
+            $class_name = "$namespace\\$lastname";
+            if (class_exists($class_name))
+            {
+                return new $class_name($option);
+            }
+        }
+
+        throw new \InvalidArgumentException("class $name is not exists");
     }
 
     /**

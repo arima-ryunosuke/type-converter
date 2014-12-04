@@ -9,8 +9,8 @@
         { "name": "ryunosuke", "email": "ryunosuke.arima@gmail.com" }
     ],
     "autoload": {
-        "psr-0": {
-            "ryunosuke\\TypeConverter": "src/"
+        "psr-4": {
+            "ryunosuke\\TypeConverter\\": "src/"
         }
     },
     "require": {

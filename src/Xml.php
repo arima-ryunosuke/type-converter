@@ -143,16 +143,30 @@ class Xml extends AbstractConverter
         $result = array();
         foreach ($node->childNodes as $child)
         {
-            if ($child->nodeType === XML_TEXT_NODE)
+            if ($child->nodeType === XML_COMMENT_NODE)
             {
-                $result = $child->nodeValue;
-
-                if ($node->attributes->length)
+                continue;
+            }
+            else if ($child->nodeType === XML_TEXT_NODE || $child->nodeType === XML_CDATA_SECTION_NODE)
+            {
+                // コメントノードやCDATAが挟まっている場合を考慮
+                $value = $child->nodeValue;
+                if (is_string($result))
                 {
-                    $result = array(
-                        '@attributes' => $attr2array($node->attributes),
-                        $result,
-                    );
+                    $value = $result . $value;
+                }
+                $result = $value;
+
+                // テキストノードの場合は属性も見る
+                if ($child->nodeType === XML_TEXT_NODE)
+                {
+                    if ($node->attributes->length)
+                    {
+                        $result = array(
+                            '@attributes' => $attr2array($node->attributes),
+                            $result,
+                        );
+                    }
                 }
             }
             else

@@ -106,6 +106,32 @@ class XmlTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     */
+    function cdata()
+    {
+        $converter = new Xml();
+        $input = '<?xml version="1.0" encoding="utf-8"?><root><element>te<![CDATA[<?xml version="1.0" ?><node></node>]]>xt</element></root>';
+        $output = array(
+            'element' => 'te<?xml version="1.0" ?><node></node>xt'
+        );
+        $this->assertEquals($output, $converter->deconvert($input));
+    }
+
+    /**
+     * @test
+     */
+    function ignorecomment()
+    {
+        $converter = new Xml();
+        $input = '<?xml version="1.0" encoding="utf-8"?><root><!-- コメント --><element>ho<!-- コメント -->ge</element></root>';
+        $output = array(
+            'element' => 'hoge'
+        );
+        $this->assertEquals($output, $converter->deconvert($input));
+    }
+
+    /**
+     * @test
      * @expectedException RuntimeException
      * @expectedExceptionMessage $array is not array
      */
@@ -118,7 +144,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException RuntimeException
-     * @expectedExceptionMessage  is not alphanum
+     * @expectedExceptionMessage is not alphanum
      */
     function flatarray()
     {

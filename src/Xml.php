@@ -179,6 +179,10 @@ class Xml extends AbstractConverter
                 }
                 else
                 {
+                    if (is_array($value) && count($value) === 0)
+                    {
+                        $value = "";
+                    }
                     $result[$child->nodeName] = $value;
                 }
             }

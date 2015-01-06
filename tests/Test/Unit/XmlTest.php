@@ -12,7 +12,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
                 array(
                     'holder' => array(
                         array(
-                            'empty' => array(),
+                            'empty' => "",
                         ),
                         array(
                             'values' => array(

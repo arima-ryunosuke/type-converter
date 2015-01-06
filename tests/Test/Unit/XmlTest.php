@@ -140,6 +140,18 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException RuntimeException
+     * @expectedExceptionMessage text node and element node are mixed
+     */
+    function mixed_textelement()
+    {
+        $converter = new Xml();
+        $input = '<?xml version="1.0" encoding="utf-8"?><root>text<element></element></root>';
+        $converter->deconvert($input);
+    }
+
+    /**
+     * @test
+     * @expectedException RuntimeException
      * @expectedExceptionMessage @attributes is not array
      */
     function notarray_attribute()

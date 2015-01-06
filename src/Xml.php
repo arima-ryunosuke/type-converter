@@ -179,6 +179,10 @@ class Xml extends AbstractConverter
                 }
                 else
                 {
+                    if (!is_array($result))
+                    {
+                        throw new \RuntimeException('text node and element node are mixed');
+                    }
                     if (is_array($value) && count($value) === 0)
                     {
                         $value = "";

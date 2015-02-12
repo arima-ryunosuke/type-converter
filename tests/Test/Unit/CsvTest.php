@@ -36,8 +36,8 @@ row2col1,row2col2
                         'header2' => 'row1col2',
                     ),
                     array(
-                        'header1' => 'row2col1',
                         'header2' => 'row2col2',
+                        'header1' => 'row2col1',
                     ),
                 ),
                 'header1,header2
@@ -112,5 +112,20 @@ col1"," row1col2 ","row1"",col2"
         ));
         $converter->deconvert("header1,header2
 row1col1,row1col2,row1col3");
+    }
+
+    /**
+     * @test
+     * @expectedException InvalidArgumentException
+     */
+    function invalid3()
+    {
+        $converter = new Csv(array(
+            Csv::USE_FIRST_LINE => true
+        ));
+        $converter->convert(array(
+            array('a' => 1, 'b' => 2),
+            array('a' => 1, 'c' => 3),
+        ));
     }
 }

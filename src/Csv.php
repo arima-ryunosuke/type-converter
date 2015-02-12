@@ -45,13 +45,29 @@ class Csv extends AbstractConverter
         $handle = tmpfile();
         foreach ($data as $row)
         {
-            if ($USE_FIRST_LINE && !isset($first) && $first = true)
+            if ($USE_FIRST_LINE)
             {
-                if (!self::isHashArray($row))
+                if (!isset($first) && $first = true)
                 {
-                    throw new \InvalidArgumentException('first line is not hash array');
+                    if (!self::isHashArray($row))
+                    {
+                        throw new \InvalidArgumentException('first line is not hash array');
+                    }
+
+                    $header = array_keys($row);
+                    fputcsv($handle, $header, $DELIMITER, $ENCLOSURE);
                 }
-                fputcsv($handle, array_keys($row), $DELIMITER, $ENCLOSURE);
+
+                $tmp = array();
+                foreach ($header as $n => $head)
+                {
+                    if (! isset($row[$head]))
+                    {
+                        throw new \InvalidArgumentException("undefined header '$head'");
+                    }
+                    $tmp[$head] = $row[$head];
+                }
+                $row = $tmp;
             }
 
             fputcsv($handle, $row, $DELIMITER, $ENCLOSURE);

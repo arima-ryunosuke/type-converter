@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Unit\TypeConverter;
+namespace ryunosuke\Test\TypeConverter;
 use ryunosuke\TypeConverter\Xml;
 
 class XmlTest extends \PHPUnit_Framework_TestCase

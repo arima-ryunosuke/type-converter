@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Unit\TypeConverter;
+namespace ryunosuke\Test\TypeConverter;
 use ryunosuke\TypeConverter\Jsonp;
 
 class JsonpTest extends \PHPUnit_Framework_TestCase

@@ -1,7 +1,6 @@
 <?php
 
 $loader = require __DIR__ . '/../vendor/autoload.php';
-$loader->addPsr4('Test\\', __DIR__ . '/Test/');
 
 // Windows 用
 if (!function_exists('yaml_emit'))

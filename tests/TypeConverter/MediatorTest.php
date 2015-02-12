@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Unit\TypeConverter;
+namespace ryunosuke\Test\TypeConverter;
 use ryunosuke\TypeConverter\Mediator;
 use ryunosuke\TypeConverter\Json;
 use ryunosuke\TypeConverter\Xml;

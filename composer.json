@@ -10,7 +10,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "ryunosuke\\TypeConverter\\": "src/"
+            "ryunosuke\\TypeConverter\\": "src/TypeConverter/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ryunosuke\\Test\\TypeConverter\\": "tests/TypeConverter"
         }
     },
     "require": {

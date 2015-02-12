@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Unit\TypeConverter;
+namespace ryunosuke\Test\TypeConverter;
 use ryunosuke\TypeConverter\Yaml;
 
 class YamlTest extends \PHPUnit_Framework_TestCase

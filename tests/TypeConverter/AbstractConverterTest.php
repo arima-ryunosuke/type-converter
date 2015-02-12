@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Unit\TypeConverter;
+namespace ryunosuke\Test\TypeConverter;
 use ryunosuke\TypeConverter\AbstractConverter;
 
 class TestType extends \ryunosuke\TypeConverter\Json

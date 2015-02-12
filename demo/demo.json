@@ -1,0 +1,23 @@
+{
+    "holder": [
+        {
+            "empty": ""
+        },
+        {
+            "values": {
+                "key1": "value",
+                "key2": "value"
+            }
+        },
+        {
+            "values": {
+                "@attributes": {
+                    "attr1": "attrvalue1",
+                    "attr2": "attrvalue2"
+                },
+                "key1": "value1",
+                "key2": "value2"
+            }
+        }
+    ]
+}

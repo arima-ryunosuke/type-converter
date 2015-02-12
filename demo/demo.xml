@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<holder>
+		<empty></empty>
+	</holder>
+	<holder>
+		<values>
+			<key1>value</key1>
+			<key2>value</key2>
+		</values>
+	</holder>
+	<holder>
+		<values attr1="attrvalue1" attr2="attrvalue2">
+			<key1>value1</key1>
+			<key2>value2</key2>
+		</values>
+	</holder>
+</root>

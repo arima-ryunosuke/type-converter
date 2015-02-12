@@ -120,6 +120,27 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    function emptynode()
+    {
+        $converter = new Xml(array(
+            'rootNodeName'       => 'root',
+            'formatOutput'       => false,
+            'preserveWhiteSpace' => true
+        ));
+        $input1 = array(
+            'element' => array()
+        );
+        $input2 = array(
+            'element' => ''
+        );
+        $output = '<?xml version="1.0" encoding="utf-8"?>' . "\n" . '<root><element></element></root>' . "\n";
+        $this->assertEquals($output, $converter->convert($input1));
+        $this->assertEquals($output, $converter->convert($input2));
+    }
+
+    /**
+     * @test
+     */
     function ignorecomment()
     {
         $converter = new Xml();

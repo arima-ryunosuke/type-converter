@@ -1,5 +1,4 @@
 <?php
-
 namespace ryunosuke\TypeConverter;
 
 /**
@@ -9,6 +8,7 @@ namespace ryunosuke\TypeConverter;
  */
 class Jsonp extends Json
 {
+
     protected $mimetype = 'application/javascript';
 
     protected $callback = 'callback';
@@ -16,17 +16,15 @@ class Jsonp extends Json
     public function __construct($option = array())
     {
         //コールバック名だけ抜き出してあとは Json クラスとおなじ
-        if (array_key_exists('callback', $option))
-        {
-            if (!preg_match('/^[a-z_][0-9a-z_]{0,63}$/i', $option['callback']))
-            {
+        if (array_key_exists('callback', $option)) {
+            if (! preg_match('/^[a-z_][0-9a-z_]{0,63}$/i', $option['callback'])) {
                 throw new \InvalidArgumentException('jsonp callback is invalid');
             }
-
+            
             $this->callback = $option['callback'];
             unset($option['callback']);
         }
-
+        
         parent::__construct($option);
     }
 

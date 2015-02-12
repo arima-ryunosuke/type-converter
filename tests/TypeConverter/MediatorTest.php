@@ -1,20 +1,21 @@
 <?php
-
 namespace ryunosuke\Test\TypeConverter;
+
 use ryunosuke\TypeConverter\Mediator;
 use ryunosuke\TypeConverter\Json;
 use ryunosuke\TypeConverter\Xml;
 
 class MediatorTest extends \PHPUnit_Framework_TestCase
 {
+
     function provideArray()
     {
         return array(
             array(
                 'holder' => array(
                     'key1' => 'value1',
-                    'key2' => 'value2',
-                ),
+                    'key2' => 'value2'
+                )
             )
         );
     }
@@ -25,7 +26,7 @@ class MediatorTest extends \PHPUnit_Framework_TestCase
     function test0()
     {
         $this->setExpectedException(get_class(new \InvalidArgumentException()));
-
+        
         $converter = new Mediator(false, false);
     }
 
@@ -41,16 +42,16 @@ class MediatorTest extends \PHPUnit_Framework_TestCase
         $xop = array(
             'rootNodeName' => 'hoge'
         );
-
+        
         $json = new Json($jop);
         $xml = new Xml($xop);
-
+        
         $jsondata = $json->convert($array);
         $xmldata = $xml->convert($array);
-
+        
         $converter = new Mediator(array(
             'json' => $jop,
-            'xml'  => $xop,
+            'xml' => $xop
         ));
         $this->assertEquals($xmldata, $converter->convert($jsondata));
         $this->assertEquals($jsondata, $converter->deconvert($xmldata));
@@ -70,13 +71,13 @@ class MediatorTest extends \PHPUnit_Framework_TestCase
         $xop = array(
             'rootNodeName' => 'hoge'
         );
-
+        
         $json = new Json($jop);
         $xml = new Xml($xop);
-
+        
         $jsondata = $json->convert($array);
         $xmldata = $xml->convert($array);
-
+        
         $converter = new Mediator($json, $xml);
         $this->assertEquals($xmldata, $converter->convert($jsondata));
         $this->assertEquals($jsondata, $converter->deconvert($xmldata));
@@ -96,13 +97,13 @@ class MediatorTest extends \PHPUnit_Framework_TestCase
         $xop = array(
             'rootNodeName' => 'hoge'
         );
-
+        
         $json = new Json($jop);
         $xml = new Xml($xop);
-
+        
         $jsondata = $json->convert($array);
         $xmldata = $xml->convert($array);
-
+        
         $converter = new Mediator('json', 'xml', $jop, $xop);
         $this->assertEquals($xmldata, $converter->convert($jsondata));
         $this->assertEquals($jsondata, $converter->deconvert($xmldata));

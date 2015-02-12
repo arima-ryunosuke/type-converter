@@ -1,5 +1,4 @@
 <?php
-
 namespace ryunosuke\TypeConverter;
 
 /**
@@ -9,38 +8,36 @@ namespace ryunosuke\TypeConverter;
  */
 class Mediator extends AbstractConverter
 {
+
     private $_from;
+
     private $_to;
 
     public function __construct($from, $to = null, $from_option = array(), $to_option = array())
     {
-        if (func_num_args() === 1 && is_array($from))
-        {
+        if (func_num_args() === 1 && is_array($from)) {
             $mixed = $from;
             reset($mixed);
-
+            
             $arg = each($mixed);
             $from = self::factory($arg[0], $arg[1]);
             $arg = each($mixed);
             $to = self::factory($arg[0], $arg[1]);
         }
-        if (is_string($from))
-        {
+        if (is_string($from)) {
             $from = self::factory($from, $from_option);
         }
-        if (is_string($to))
-        {
+        if (is_string($to)) {
             $to = self::factory($to, $to_option);
         }
-
-        if (!($from instanceof AbstractConverter) || !($to instanceof AbstractConverter))
-        {
+        
+        if (! ($from instanceof AbstractConverter) || ! ($to instanceof AbstractConverter)) {
             throw new \InvalidArgumentException('$from or $to are not AbstractConverter instance');
         }
-
+        
         $this->_from = $from;
         $this->_to = $to;
-
+        
         parent::__construct(array());
     }
 

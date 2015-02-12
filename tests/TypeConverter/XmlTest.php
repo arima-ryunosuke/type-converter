@@ -1,10 +1,11 @@
 <?php
-
 namespace ryunosuke\Test\TypeConverter;
+
 use ryunosuke\TypeConverter\Xml;
 
 class XmlTest extends \PHPUnit_Framework_TestCase
 {
+
     function provideArray()
     {
         return array(
@@ -12,23 +13,23 @@ class XmlTest extends \PHPUnit_Framework_TestCase
                 array(
                     'holder' => array(
                         array(
-                            'empty' => "",
+                            'empty' => ""
                         ),
                         array(
                             'values' => array(
                                 'key1' => 'value',
-                                'key2' => 'value',
-                            ),
+                                'key2' => 'value'
+                            )
                         ),
                         array(
                             'values' => array(
                                 '@attributes' => array(
                                     'attr1' => 'attrvalue1',
-                                    'attr2' => 'attrvalue2',
+                                    'attr2' => 'attrvalue2'
                                 ),
-                                'key1'        => 'value1',
-                                'key2'        => 'value2',
-                            ),
+                                'key1' => 'value1',
+                                'key2' => 'value2'
+                            )
                         ),
                         array(
                             'values' => array(
@@ -36,13 +37,13 @@ class XmlTest extends \PHPUnit_Framework_TestCase
                                 'key2' => array(
                                     '@attributes' => array(
                                         'attr3' => 'attrvalue3',
-                                        'attr4' => 'attrvalue4',
+                                        'attr4' => 'attrvalue4'
                                     ),
-                                    'value4',
-                                ),
-                            ),
-                        ),
-                    ),
+                                    'value4'
+                                )
+                            )
+                        )
+                    )
                 ),
                 '<?xml version="1.0" encoding="utf-8"?>
 <root>
@@ -68,8 +69,8 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     </values>
   </holder>
 </root>
-',
-            ),
+'
+            )
         );
     }
 
@@ -92,13 +93,13 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     function option()
     {
         $option = array(
-            'rootNodeName'       => 'hogehoge',
-            'formatOutput'       => false,
-            'preserveWhiteSpace' => true,
+            'rootNodeName' => 'hogehoge',
+            'formatOutput' => false,
+            'preserveWhiteSpace' => true
         );
         $converter = new Xml($option);
         $input = array(
-            'node_name' => 'node_value',
+            'node_name' => 'node_value'
         );
         $output = '<?xml version="1.0" encoding="utf-8"?>' . "\n" . '<hogehoge><node_name>node_value</node_name></hogehoge>' . "\n";
         $this->assertEquals($output, $converter->convert($input));
@@ -123,8 +124,8 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     function emptynode()
     {
         $converter = new Xml(array(
-            'rootNodeName'       => 'root',
-            'formatOutput'       => false,
+            'rootNodeName' => 'root',
+            'formatOutput' => false,
             'preserveWhiteSpace' => true
         ));
         $input1 = array(
@@ -170,7 +171,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     function flatarray()
     {
         $converter = new Xml();
-        $converter->convert(array(1, 2, 3, 4, 5));
+        $converter->convert(range(1, 5));
     }
 
     /**
@@ -181,7 +182,9 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     function invalid_nodename()
     {
         $converter = new Xml();
-        $converter->convert(array('@hoge' => 'value'));
+        $converter->convert(array(
+            '@hoge' => 'value'
+        ));
     }
 
     /**

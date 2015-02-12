@@ -1,5 +1,4 @@
 <?php
-
 namespace ryunosuke\TypeConverter;
 
 /**
@@ -9,6 +8,7 @@ namespace ryunosuke\TypeConverter;
  */
 abstract class AbstractConverter
 {
+
     /**
      * factory用名前空間(オートロード前提)
      * @var array
@@ -51,19 +51,17 @@ abstract class AbstractConverter
     {
         $namespaces = self::$_namespaces;
         $namespaces[__NAMESPACE__] = true;
-
+        
         $names = explode("\\", $name);
         $lastname = end($names);
-
-        foreach ($namespaces as $namespace => $dummy)
-        {
+        
+        foreach ($namespaces as $namespace => $dummy) {
             $class_name = "$namespace\\$lastname";
-            if (class_exists($class_name))
-            {
+            if (class_exists($class_name)) {
                 return new $class_name($option);
             }
         }
-
+        
         throw new \InvalidArgumentException("class $name is not exists");
     }
 
@@ -76,14 +74,12 @@ abstract class AbstractConverter
     static public function isHashArray(array $array)
     {
         $i = 0;
-        foreach ($array as $k => $dummy)
-        {
-            if ($k !== $i++)
-            {
+        foreach ($array as $k => $dummy) {
+            if ($k !== $i++) {
                 return true;
             }
         }
-
+        
         return false;
     }
 
@@ -97,28 +93,22 @@ abstract class AbstractConverter
      */
     static public function toPascalCase($value, $separator = '_')
     {
-        if (is_array($value))
-        {
+        if (is_array($value)) {
             $result = array();
-            foreach ($value as $k => $v)
-            {
+            foreach ($value as $k => $v) {
                 $key = is_string($k) ? self::toPascalCase($k, $separator) : $k;
                 $val = is_array($v) ? self::toPascalCase($v, $separator) : $v;
                 $result[$key] = $val;
             }
             return $result;
-        }
-        else if (is_string($value))
-        {
+        } else if (is_string($value)) {
             $strings = explode($separator, trim($value, $separator));
             array_walk($strings, function (&$v, $k)
             {
                 $v = $k === 0 ? $v : ucfirst($v);
             });
             return ucfirst(implode('', $strings));
-        }
-        else
-        {
+        } else {
             throw new \InvalidArgumentException('$value is must be string or array');
         }
     }
@@ -133,27 +123,21 @@ abstract class AbstractConverter
      */
     static public function toSnakeCase($value, $separator = '_')
     {
-        if (is_array($value))
-        {
+        if (is_array($value)) {
             $result = array();
-            foreach ($value as $k => $v)
-            {
+            foreach ($value as $k => $v) {
                 $key = is_string($k) ? self::toSnakeCase($k, $separator) : $k;
                 $val = is_array($v) ? self::toSnakeCase($v, $separator) : $v;
                 $result[$key] = $val;
             }
             return $result;
-        }
-        else if (is_string($value))
-        {
-            $value = preg_replace_callback('/(?<=.)[A-Z]/us', function ($matches) use ($separator)
+        } else if (is_string($value)) {
+            $value = preg_replace_callback('/(?<=.)[A-Z]/us', function ($matches) use($separator)
             {
                 return $separator . strtolower($matches[0]);
             }, $value);
             return lcfirst($value);
-        }
-        else
-        {
+        } else {
             throw new \InvalidArgumentException('$value is must be string or array');
         }
     }
@@ -177,11 +161,10 @@ abstract class AbstractConverter
      */
     public function getMimeType()
     {
-        if ($this->mimetype === null)
-        {
+        if ($this->mimetype === null) {
             throw new \LogicException('mimetype is not set');
         }
-
+        
         return $this->mimetype;
     }
 

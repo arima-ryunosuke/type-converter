@@ -1,35 +1,36 @@
 <?php
-
 namespace ryunosuke\Test\TypeConverter;
+
 use ryunosuke\TypeConverter\Php;
 
 class PhpTest extends \PHPUnit_Framework_TestCase
 {
+
     function provideArray()
     {
         return array(
             array(
                 array(
                     'key1' => 'value1',
-                    'key2' => 'value2',
+                    'key2' => 'value2'
                 ),
-                'a:2:{s:4:"key1";s:6:"value1";s:4:"key2";s:6:"value2";}',
+                'a:2:{s:4:"key1";s:6:"value1";s:4:"key2";s:6:"value2";}'
             ),
             array(
                 array(
                     'holder' => array(
                         array(
                             'key1' => 'value1',
-                            'key2' => 'value2',
+                            'key2' => 'value2'
                         ),
                         array(
                             'key1' => 'value3',
-                            'key2' => 'value4',
+                            'key2' => 'value4'
                         )
-                    ),
+                    )
                 ),
-                'a:1:{s:6:"holder";a:2:{i:0;a:2:{s:4:"key1";s:6:"value1";s:4:"key2";s:6:"value2";}i:1;a:2:{s:4:"key1";s:6:"value3";s:4:"key2";s:6:"value4";}}}',
-            ),
+                'a:1:{s:6:"holder";a:2:{i:0;a:2:{s:4:"key1";s:6:"value1";s:4:"key2";s:6:"value2";}i:1;a:2:{s:4:"key1";s:6:"value3";s:4:"key2";s:6:"value4";}}}'
+            )
         );
     }
 

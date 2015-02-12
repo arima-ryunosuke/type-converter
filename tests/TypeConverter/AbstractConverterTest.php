@@ -1,6 +1,6 @@
 <?php
-
 namespace ryunosuke\Test\TypeConverter;
+
 use ryunosuke\TypeConverter\AbstractConverter;
 
 class TestType extends \ryunosuke\TypeConverter\Json
@@ -9,6 +9,7 @@ class TestType extends \ryunosuke\TypeConverter\Json
 
 class AbstractConverterTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @test
      * @expectedException LogicException
@@ -36,7 +37,7 @@ class AbstractConverterTest extends \PHPUnit_Framework_TestCase
     {
         $json = AbstractConverter::factory('json', array());
         $this->assertInstanceOf(get_class(new \ryunosuke\TypeConverter\Json()), $json);
-
+        
         $this->setExpectedException(get_class(new \InvalidArgumentException()));
         AbstractConverter::factory('undefined', array());
     }
@@ -47,15 +48,15 @@ class AbstractConverterTest extends \PHPUnit_Framework_TestCase
     function isHasArray_true()
     {
         $array = array(
-            '0'   => 'hoge',
+            '0' => 'hoge',
             '1.0' => 'fuga',
-            '2'   => 'piyo',
+            '2' => 'piyo'
         );
         $this->assertTrue(AbstractConverter::isHashArray($array));
-
+        
         $array = array(
             1 => 'fuga',
-            2 => 'piyo',
+            2 => 'piyo'
         );
         $this->assertTrue(AbstractConverter::isHashArray($array));
     }
@@ -67,38 +68,38 @@ class AbstractConverterTest extends \PHPUnit_Framework_TestCase
     {
         $array = array();
         $this->assertFalse(AbstractConverter::isHashArray($array));
-
+        
         $array = array(
             '0' => 'hoge',
             '1' => 'fuga',
-            '2' => 'piyo',
+            '2' => 'piyo'
         );
         $this->assertFalse(AbstractConverter::isHashArray($array));
-
+        
         $array[] = 'hage';
         $this->assertFalse(AbstractConverter::isHashArray($array));
-
+        
         $array = array(
             0 => 'hoge',
             1 => 'fuga',
-            2 => 'piyo',
+            2 => 'piyo'
         );
         $this->assertFalse(AbstractConverter::isHashArray($array));
-
+        
         $array[] = 'hage';
         $this->assertFalse(AbstractConverter::isHashArray($array));
-
+        
         $array = array(
             'hoge',
             'fuga',
-            'piyo',
+            'piyo'
         );
         $this->assertFalse(AbstractConverter::isHashArray($array));
-
+        
         $array = array(
             'hoge',
             1 => 'fuga',
-            'piyo',
+            'piyo'
         );
         $this->assertFalse(AbstractConverter::isHashArray($array));
     }
@@ -122,7 +123,7 @@ class AbstractConverterTest extends \PHPUnit_Framework_TestCase
             'KeyKey1' => array(
                 'KeyKey2' => array(
                     'value1',
-                    'value2',
+                    'value2'
                 )
             )
         );
@@ -130,7 +131,7 @@ class AbstractConverterTest extends \PHPUnit_Framework_TestCase
             'key_key1' => array(
                 'key_key2' => array(
                     'value1',
-                    'value2',
+                    'value2'
                 )
             )
         );
@@ -166,7 +167,7 @@ class AbstractConverterTest extends \PHPUnit_Framework_TestCase
             'key_key1' => array(
                 'key_key2' => array(
                     'value1',
-                    'value2',
+                    'value2'
                 )
             )
         );
@@ -174,7 +175,7 @@ class AbstractConverterTest extends \PHPUnit_Framework_TestCase
             'KeyKey1' => array(
                 'KeyKey2' => array(
                     'value1',
-                    'value2',
+                    'value2'
                 )
             )
         );

@@ -1,5 +1,4 @@
 <?php
-
 namespace ryunosuke\TypeConverter;
 
 /**
@@ -9,15 +8,16 @@ namespace ryunosuke\TypeConverter;
  */
 class Json extends AbstractConverter
 {
+
     protected $mimetype = 'application/json';
 
     public function __construct($option = array())
     {
         $option = $option + array(
             JSON_UNESCAPED_UNICODE => true,
-            JSON_PRETTY_PRINT      => true,
+            JSON_PRETTY_PRINT => true
         );
-
+        
         parent::__construct($option);
     }
 
@@ -31,12 +31,11 @@ class Json extends AbstractConverter
     {
         $result = json_decode($data, true);
         $error = json_last_error();
-
-        if ($error !== JSON_ERROR_NONE)
-        {
+        
+        if ($error !== JSON_ERROR_NONE) {
             throw new \InvalidArgumentException('invalid json format', $error);
         }
-
+        
         return $result;
     }
 }

@@ -1,10 +1,11 @@
 <?php
-
 namespace ryunosuke\Test\TypeConverter;
+
 use ryunosuke\TypeConverter\Csv;
 
 class CsvTest extends \PHPUnit_Framework_TestCase
 {
+
     function provideArray1()
     {
         return array(
@@ -12,17 +13,17 @@ class CsvTest extends \PHPUnit_Framework_TestCase
                 array(
                     array(
                         'row1col1',
-                        'row1col2',
+                        'row1col2'
                     ),
                     array(
                         'row2col1',
-                        'row2col2',
-                    ),
+                        'row2col2'
+                    )
                 ),
                 'row1col1,row1col2
 row2col1,row2col2
-',
-            ),
+'
+            )
         );
     }
 
@@ -33,31 +34,31 @@ row2col1,row2col2
                 array(
                     array(
                         'header1' => 'row1col1',
-                        'header2' => 'row1col2',
+                        'header2' => 'row1col2'
                     ),
                     array(
                         'header2' => 'row2col2',
-                        'header1' => 'row2col1',
-                    ),
+                        'header1' => 'row2col1'
+                    )
                 ),
                 'header1,header2
 row1col1,row1col2
 row2col1,row2col2
-',
+'
             ),
             array(
                 array(
                     array(
                         'header1' => "row1\ncol1",
                         'header2' => ' row1col2 ',
-                        'header3' => 'row1",col2',
-                    ),
+                        'header3' => 'row1",col2'
+                    )
                 ),
                 'header1,header2,header3
 "row1
 col1"," row1col2 ","row1"",col2"
-',
-            ),
+'
+            )
         );
     }
 
@@ -98,7 +99,12 @@ col1"," row1col2 ","row1"",col2"
         $converter = new Csv(array(
             Csv::USE_FIRST_LINE => true
         ));
-        $converter->convert(array(array('a', 'b')));
+        $converter->convert(array(
+            array(
+                'a',
+                'b'
+            )
+        ));
     }
 
     /**
@@ -124,8 +130,14 @@ row1col1,row1col2,row1col3");
             Csv::USE_FIRST_LINE => true
         ));
         $converter->convert(array(
-            array('a' => 1, 'b' => 2),
-            array('a' => 1, 'c' => 3),
+            array(
+                'a' => 1,
+                'b' => 2
+            ),
+            array(
+                'a' => 1,
+                'c' => 3
+            )
         ));
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace ryunosuke\TypeConverter;
 
 /**
@@ -9,6 +8,7 @@ namespace ryunosuke\TypeConverter;
  */
 class Yaml extends AbstractConverter
 {
+
     protected $mimetype = 'text/x-yaml';
 
     public function convert($data)
@@ -19,7 +19,7 @@ class Yaml extends AbstractConverter
     public function deconvert($data)
     {
         $result = yaml_parse($data);
-
+        
         return $result;
     }
 }

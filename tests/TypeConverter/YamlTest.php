@@ -1,35 +1,36 @@
 <?php
-
 namespace ryunosuke\Test\TypeConverter;
+
 use ryunosuke\TypeConverter\Yaml;
 
 class YamlTest extends \PHPUnit_Framework_TestCase
 {
+
     function provideArray()
     {
         return array(
             array(
                 array(
                     'key1' => 'value1',
-                    'key2' => 'value2',
+                    'key2' => 'value2'
                 ),
-                '{"key1":"value1","key2":"value2"}',
+                '{"key1":"value1","key2":"value2"}'
             ),
             array(
                 array(
                     'holder' => array(
                         array(
                             'key1' => 'value1',
-                            'key2' => 'value2',
+                            'key2' => 'value2'
                         ),
                         array(
                             'key1' => 'value3',
-                            'key2' => 'value4',
+                            'key2' => 'value4'
                         )
-                    ),
+                    )
                 ),
-                '{"holder":[{"key1":"value1","key2":"value2"},{"key1":"value3","key2":"value4"}]}',
-            ),
+                '{"holder":[{"key1":"value1","key2":"value2"},{"key1":"value3","key2":"value4"}]}'
+            )
         );
     }
 

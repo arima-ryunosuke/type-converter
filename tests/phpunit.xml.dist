@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="https://raw.github.com/sebastianbergmann/phpunit/master/phpunit.xsd"
-    bootstrap="bootstrap.php"
->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.github.com/sebastianbergmann/phpunit/master/phpunit.xsd" bootstrap="bootstrap.php">
 
 	<filter>
 		<whitelist>
@@ -13,5 +10,4 @@
 	<logging>
 		<log type="coverage-html" target="./report" />
 	</logging>
-
 </phpunit>
